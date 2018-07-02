@@ -6,12 +6,13 @@ module.exports = function (sesId,query,callback) {
 	};
 	var reply;
 		//console.log(2);
-		
-		var request = app.textRequest(query, options);
+			var request = app.textRequest(query, options);
 		request.on('response',function(response){
 		//console.log(3);
 		//console.log(response.result.fulfillment.speech);
 		var Result=response.result;
+		console.log(response);
+		console.log(response.result.contexts);
 		//console.log(Result.actionIncomplete);
 			if(Result.actionIncomplete==false)
 
@@ -34,7 +35,7 @@ module.exports = function (sesId,query,callback) {
 			}
 
 		callback(reply);
-		});
+		})
 		request.on('error',function(error){
 
 		console.log(error);
@@ -46,7 +47,9 @@ module.exports = function (sesId,query,callback) {
 		request.end();
 
 		//console.log(4);
-		
+		process.on('uncaughtException', function (error) {
+   console.log(error.stack);
+	});
 		
 
 };
