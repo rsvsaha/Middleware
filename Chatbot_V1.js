@@ -1,7 +1,8 @@
+cosnt apiai=require('apiai');
+const app=apiai("a005521e4a574ad59ab090190ab7a5d8"); //Put the required access token for the bot
+	
 module.exports = function (sesId,query,callback) { 
-    var apiai=require('apiai');
-	var app=apiai("a005521e4a574ad59ab090190ab7a5d8"); //Put the required access token for the bot
-	var options={
+    var options={
 		sessionId:sesId
 	};
 	var reply;
