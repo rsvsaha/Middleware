@@ -2,19 +2,20 @@
 const backindex = require(./index);
 
 //Function to be called by Middleware main
-exports.bkconn = function(json_param) {
-
+exports.bkconn = function(json_param, callback) {
+	
 	if (json_param.issue == true) {
 		//Issue device
+		
 		var devqr = {"RAM" : json_param.parameters.ram, "Storage" : json_param.parameters.storage};
 		var dev_details = backindex.query_device(devqr);
 		
 		//Uses the device id obtained from above function call
 		var unitqr = {"DeviceID" : dev_details.DeviceID, "OS" : json_param.parameters.os, "EmployeeRegistrationID" : "none"};
 		var unit_details = backindex.issue_unit(unitqr);
-		
-		return unit_details.unitID;
-		
+			
+		result = unit_details.unitID;
+		callback(result);
 	}
 	
 	else {
@@ -26,6 +27,7 @@ exports.bkconn = function(json_param) {
 		var unitqr = {"DeviceID" : dev_details.DeviceID, "OS" : json_param.parameters.os, "EmployeeRegistrationID" : "none"};
 		var unit_details = backindex.query_unit(unitqr);
 		
-		return unit_details.NoOfAvailable;
-	}
-}
+		result = unit_details.NoOfAvailable;
+		callback(result);
+	}	
+};
