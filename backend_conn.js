@@ -4,30 +4,36 @@ const backindex = require(./index);
 //Function to be called by Middleware main
 exports.bkconn = function(json_param, callback) {
 	
-	if (json_param.issue == true) {
+	console.log(json_param);
+
+	//Uncomment below code to access database calls
+
+	/*if (json_param.issue == true) {
 		//Issue device
 		
-		var devqr = {"RAM" : json_param.parameters.ram, "Storage" : json_param.parameters.storage};
-		var dev_details = backindex.query_device(devqr);
+		var devqr = {"RAM" : json_param.parameters.ram, "Storage" : json_param.parameters.storage, "OS" : json_param.parameters.os};
+		var dev_details = backindex.queryDB(devqr);
 		
 		//Uses the device id obtained from above function call
-		var unitqr = {"DeviceID" : dev_details.DeviceID, "OS" : json_param.parameters.os, "EmployeeRegistrationID" : "none"};
-		var unit_details = backindex.issue_unit(unitqr);
-			
-		result = unit_details.unitID;
+		var unitqr = {"DeviceID" : dev_details.DeviceID, "EmployeeRegistrationID" : "none", "UnitCondition" : "healthy"};
+		var unit_details = backindex.query_unit(unitqr);
+		
+		var unitissue = {"UnitID" : unit_details[0], "EmployeeRegistrationID" : json_param.parameters.EmployeeID};
+		backindex.issueUnit(unitissue);	
+		result = "Issued Device Unit ID: " + unit_details[0];
 		callback(result);
 	}
 	
 	else {
 		//Query for available devices
-		var devqr = {"RAM" : json_param.parameters.ram, "Storage" : json_param.parameters.storage};
-		var dev_details = backindex.query_device(devqr);
+		var devqr = {"RAM" : json_param.parameters.ram, "Storage" : json_param.parameters.storage, "OS" : json_param.parameters.os};
+		var dev_details = backindex.queryDB(devqr);
 
 		//Uses the device id obtained from above function call
-		var unitqr = {"DeviceID" : dev_details.DeviceID, "OS" : json_param.parameters.os, "EmployeeRegistrationID" : "none"};
+		var unitqr = {"DeviceID" : dev_details.DeviceID, "EmployeeRegistrationID" : "none", "UnitCondition" : "healthy"};
 		var unit_details = backindex.query_unit(unitqr);
 		
-		result = unit_details.NoOfAvailable;
+		result = unit_details.length;
 		callback(result);
-	}	
+	}*/	
 };
