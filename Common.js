@@ -1,9 +1,7 @@
-
-
 module.exports.chat = function(req,callback){
 
  var data = req.body;
- var result=  data.query;
+ var query=  data.query;
  var token = data.token;	
  callback(result, token);
 }
