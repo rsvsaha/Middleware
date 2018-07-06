@@ -15,7 +15,10 @@
     {
         document.getElementById("send").value = 'Working...';
         var ques = document.getElementById("query").value;
-        data = {query : ques}; //join addtional parameters by '&'
+        data = {
+		"query" : ques,
+		"token" : '1234'
+		}; //join addtional parameters by '&'
         document.getElementById("query").value = '';
 
         document.getElementById("conversation").value = document.getElementById("conversation").value + '\nYou: ' + ques;
