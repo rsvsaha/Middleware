@@ -1,13 +1,13 @@
-var cor=require('cors');
+//var cor=require('cors');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser'); 
 var fs=require('fs');
-var comm=require('./Common.js');
+var comm=require('./common.js');
 var chatbot=require('./Chatbot_V1.js');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cor());
+//app.use(cor());
 
 var hostname = '127.0.0.1';
 var port = 3000;
@@ -25,7 +25,7 @@ app.post('/HELLO', function(req,res){
 
 
 app.get('/', function (req, res) {
-    fs.readFile("Front.html",function(err,data) {
+    fs.readFile("front.html",function(err,data) {
       if(err)
         {res.writeHead(404, {'Content-Type': 'text/html'});
       return res.end("404 Not Found");}
@@ -44,9 +44,9 @@ app.post('/login', function(req,res){
 		console.log("POST request obtained at /login");
 		console.log(req.body);
 		res.json({"token":'1234'});
-		/*comm.logger(req,function(user,password){
+		comm.logger(req,function(user,password){
 			res.send('1234');
-		});*/
+		});
 				
 	});
 
@@ -55,17 +55,17 @@ app.post('/chat', function(req, res){
 	console.log("POST request obtained at /chat");
 	console.log(req.method);
 	console.log(req.body);
-	var token=req.body.token;
-	var query=req.body.query;
-/*
+	//var token=req.body.token;
+	//var query=req.body.query;
+
 	comm.chat(req, function(result,token){
-		chatbot(token,req,function(reply){
+		chatbot(token,result,function(reply){
 			res.send(reply);
 		});
-*/
+/*
 	chatbot(token,query,function(reply){
 		res.send(reply);
-
+*/
 	})
 
 
@@ -79,4 +79,3 @@ var server=app.listen(port, hostname, function() {
 	//var port = server.address().port
 	console.log('Example app listening at http://%s:%s', hostname, port);
 	});
- 
