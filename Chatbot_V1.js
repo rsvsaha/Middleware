@@ -67,7 +67,7 @@ module.exports = function (sesId,query,callback) {
 						if(Result.actionIncomplete==false)
 
 					{
-						console.log("HERE IN THE CONDTION");
+						//console.log("HERE IN THE CONDTION");
 						var requsest_to_backend={
 							'issue':false,
 							'parameters':Result.parameters
@@ -124,15 +124,18 @@ module.exports = function (sesId,query,callback) {
 				 bkconn.bkconn(requsest_to_backend,function(result){
 							if(result==true){
 								reply={"answer":Result.fulfillment.speech};
+								//app.deleteContextsRequest(options);
 								callback(reply);
 							}
 							else{
 
 								reply={"answer":"Sorry this device just went out of stock."};
+								//app.deleteContextsRequest(options);
 								callback(reply);	
 							}
 
 					
+
 					//TO INSERT WAY TO RESET CONTEXT
 
 
@@ -167,11 +170,13 @@ module.exports = function (sesId,query,callback) {
 				 bkconn.bkconn(requsest_to_backend,function(result){
 							if(result==true){
 								reply={"answer":Result.fulfillment.speech};
-								callback(reply);
+								//app.deleteContextsRequest(options);
+								callback(reply);		
 							}
 							else{
 
 								reply={"answer":"Sorry this device just went out of stock."};
+								//app.deleteContextsRequest(options);
 								callback(reply);	
 							}
 						
@@ -181,6 +186,18 @@ module.exports = function (sesId,query,callback) {
 				});
 		
 			}
+			
+
+
+
+
+
+
+
+
+
+
+
 
 			else{
 
