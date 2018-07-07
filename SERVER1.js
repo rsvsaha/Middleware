@@ -44,7 +44,7 @@ app.post('/login', function(req,res){
 		res.json({"token":'1234'});
 
 		comm.logger(req,function(user,password){
-			gen.generateToken(user,'false',function(token){
+			gen.generateToken(user, false, function(token){
 				res.send(token);
 			});
 		});
