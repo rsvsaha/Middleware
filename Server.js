@@ -69,8 +69,12 @@ app.post('/chat', function(req, res){
 		gen.verifyToken(token, function(response) {
 			if(response)
 			{chatbot(token, user, result, function(reply) {
-				res.send(reply);
-		});}
+				res.send(reply);});
+			}
+			else{
+			res.status(401).send("Invalid token");
+			}
+			
 	});
 
 
