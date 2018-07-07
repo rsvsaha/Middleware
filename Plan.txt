@@ -1,7 +1,0 @@
-server(req,res,function(
-Manisha(req,function(obj){
-Rishav(obj,function(reply){
-
-res will be sent
-
-}
