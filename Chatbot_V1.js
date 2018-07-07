@@ -1,5 +1,5 @@
 
-const bkconn=require('./backend_conn_demo');	
+const bkconn=require('./backend_conn');	
 module.exports = function (token,user_Id,query,callback) { 
 	console.log(query);
 	var apiai=require('apiai');    
