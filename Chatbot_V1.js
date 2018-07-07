@@ -1,6 +1,6 @@
 
  //Put the required access token for the bot
-const bkconn=require('./backend_conn_demo');	
+const bkconn=require('./backend_conn');	
 module.exports = function (token,user_Id,query,callback) { 
 	var apiai=require('apiai');    
 	var sesId=user_Id+token.substring(1,12);
