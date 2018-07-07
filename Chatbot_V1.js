@@ -1,8 +1,8 @@
-const apiai=require('apiai');
+
  //Put the required access token for the bot
-const bkconn=require('./backend_conn');	
+const bkconn=require('./backend_conn_demo');	
 module.exports = function (token,user_Id,query,callback) { 
-    
+	var apiai=require('apiai');    
 	var sesId=user_Id+token.substring(1,12);
 
     var options={
@@ -120,7 +120,8 @@ module.exports = function (token,user_Id,query,callback) {
 				     OSVersion:Result.contexts[0].parameters.OSVersion,
 				     Maker:Result.contexts[0].parameters.Maker,
 				     Model:Result.contexts[0].parameters.Model,
-				     RAM:Result.contexts[0].parameters.RAM}
+				     RAM:Result.contexts[0].parameters.RAM},
+				     "token":token
 				 };
 				 
 
@@ -182,8 +183,11 @@ module.exports = function (token,user_Id,query,callback) {
 				     OSVersion:Result.contexts[0].parameters.OSVersion,
 				     Maker:Result.contexts[0].parameters.Maker,
 				     Model:Result.contexts[0].parameters.Model,
-				     RAM:Result.contexts[0].parameters.RAM}
-				 };
+				     RAM:Result.contexts[0].parameters.RAM},
+				 	"token":token
+				 }
+
+				 ;
 				 
 
 				 bkconn.bkconn(requsest_to_backend,function(result){
