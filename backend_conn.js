@@ -48,7 +48,8 @@ exports.bkconn = function(json_param, callback) {
 			}
 
 			else {
-				callback(false);
+				var json_return = {"is_available" : false, "UnitID" : null};
+				callback(json_return);
 			}
 		}
 		);
@@ -82,7 +83,8 @@ exports.bkconn = function(json_param, callback) {
 			}
 			
 			else {
-				callback(false);
+				var json_return = {"is_available" : false, "UnitID" : null};
+				callback(json_return);
 			}
 		}
 		);
@@ -118,7 +120,9 @@ exports.bkconn = function(json_param, callback) {
 					callback(json_return);
 				}
 				else {
-					callback(false);
+
+					var json_return = {"is_available" : false, "UnitID" : null};
+					callback(json_return);
 				}
 			}
 			);
@@ -134,7 +138,9 @@ exports.bkconn = function(json_param, callback) {
 			}
 
 			else {
-				callback(false);
+
+				var json_return = {"is_available" : false, "UnitID" : null};
+				callback(json_return);
 			}
 		}
 	}
