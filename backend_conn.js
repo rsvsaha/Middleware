@@ -30,7 +30,6 @@ exports.bkconn = function(json_param, callback) {
 		}, 
 
 		function(error, request, response) {
-			console.log(request.body);
 			DeviceID = request.body.message.DeviceID;
 			var unitqr = {"DeviceID" : DeviceID, "EmployeeRegistrationID" : "none", "UnitCondition" : "healthy"};
 			second(unitqr);
@@ -51,9 +50,7 @@ exports.bkconn = function(json_param, callback) {
 		}, 
 			
 		function(error, request,  response) {
-			console.log(request.body);
 			unitList = request.body.message;
-			console.log(unitList);
 			third(unitList);
 		}
 		);
