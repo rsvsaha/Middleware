@@ -62,8 +62,8 @@ app.post('/chat', function(req, res){
 	//var token=req.body.token;
 	//var query=req.body.query;
 
-	comm.chat(req, function(result,token,user){
-		chatbot(token, user, result,function(reply){
+	comm.chat(req, function(query,token,user){
+		chatbot(token, user,query,function(reply){
 			res.send(reply);
 		});
 /*
