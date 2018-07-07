@@ -113,8 +113,16 @@ module.exports = function (token,user_Id,query,callback) {
 
 				 bkconn.bkconn(requsest_to_backend,function(result){
 							if(result.is_available==true){
-								reply={"answer":Result.fulfillment.speech+"Your unique device id is:"+result.UnitID};
-								var delete_ContextsRequest=app.deleteContextsRequest(options);
+					reply={"answer":Result.fulfillment.speech+"Your unique device id is:"+result.UnitID,
+					"parameters":{ Accessories:Result.contexts[0].parameters.Accessories,
+     				     DeviceType:Result.contexts[0].parameters.DeviceType,
+				     OS:Result.contexts[0].parameters.OS,
+				     OSVersion:Result.contexts[0].parameters.OSVersion,
+				     Maker:Result.contexts[0].parameters.Maker,
+				     Model:Result.contexts[0].parameters.Model,
+				     RAM:Result.contexts[0].parameters.RAM},
+				 	"device_ID":result.UnitID
+					};var delete_ContextsRequest=app.deleteContextsRequest(options);
 								delete_ContextsRequest.on('response',function(response){
 								callback(reply);	
 								});
@@ -166,7 +174,16 @@ module.exports = function (token,user_Id,query,callback) {
 
 				 bkconn.bkconn(requsest_to_backend,function(result){
 							if(result.is_available==true){
-								reply={"answer":Result.fulfillment.speech+"Your unique device id is:"+result.UnitID};
+					reply={"answer":Result.fulfillment.speech+"Your unique device id is:"+result.UnitID,
+					"parameters":{ Accessories:Result.contexts[0].parameters.Accessories,
+     				     DeviceType:Result.contexts[0].parameters.DeviceType,
+				     OS:Result.contexts[0].parameters.OS,
+				     OSVersion:Result.contexts[0].parameters.OSVersion,
+				     Maker:Result.contexts[0].parameters.Maker,
+				     Model:Result.contexts[0].parameters.Model,
+				     RAM:Result.contexts[0].parameters.RAM},
+				 	"device_ID":result.UnitID
+					};
 								var delete_ContextsRequest=app.deleteContextsRequest(options);
 								delete_ContextsRequest.on('response',function(response){
 								callback(reply);	
