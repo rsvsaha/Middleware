@@ -21,7 +21,7 @@ app.post('/HELLO', function(req,res){
 	});
 
 
-
+/*
 app.get('/', function (req, res) {
     fs.readFile("front.html",function(err, data) {
       if(err)
@@ -37,7 +37,7 @@ app.get('/', function (req, res) {
     })  
 
 });
-
+*/
 app.post('/login_auth', function(req, res) {
 		console.log("POST request obtained at /login_auth");
 		console.log(req.body);
@@ -66,10 +66,11 @@ app.post('/chat', function(req, res){
 	console.log(req.body);
 
 	comm.chat(req, function(result, token, user) {
-		gen.verifyToken(token, function(res) {
-			chatbot(token, user, result, function(reply) {
+		gen.verifyToken(token, function(response) {
+			if(response)
+			{chatbot(token, user, result, function(reply) {
 				res.send(reply);
-		});
+		});}
 	});
 
 
