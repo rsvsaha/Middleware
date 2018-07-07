@@ -1,5 +1,5 @@
 const apiai=require('apiai');
-const app=apiai("a005521e4a574ad59ab090190ab7a5d8"); //Put the required access token for the bot
+ //Put the required access token for the bot
 const bkconn=require('./backend_conn');	
 module.exports = function (token,user_Id,query,callback) { 
     
@@ -10,7 +10,7 @@ module.exports = function (token,user_Id,query,callback) {
 	};
 	var reply;
 		//console.log(2);
-		
+		var app=apiai("a005521e4a574ad59ab090190ab7a5d8");
 		var request = app.textRequest(query, options);
 		request.on('response',function(response){
 		//console.log(3);
@@ -124,7 +124,7 @@ module.exports = function (token,user_Id,query,callback) {
 				 };
 				 
 
-				 bkconn.bkconn(requsest_to_backend,function(result,id){
+				 bkconn.bkconn(requsest_to_backend,function(result){
 							if(result==true){
 								reply={"answer":Result.fulfillment.speech};
 								var delete_ContextsRequest=app.deleteContextsRequest(options);
@@ -135,6 +135,7 @@ module.exports = function (token,user_Id,query,callback) {
 								console.log(error);
 								callbak(reply);	
 								});
+								delete_ContextsRequest.end();
 							}
 							else{
 
@@ -148,7 +149,8 @@ module.exports = function (token,user_Id,query,callback) {
 								console.log(error);
 								callbak(reply);	
 								});
-	
+								delete_ContextsRequest.end();
+							
 							}
 
 					
@@ -184,7 +186,7 @@ module.exports = function (token,user_Id,query,callback) {
 				 };
 				 
 
-				 bkconn.bkconn(requsest_to_backend,function(result,id){
+				 bkconn.bkconn(requsest_to_backend,function(result){
 							if(result==true){
 								reply={"answer":Result.fulfillment.speech};
 								var delete_ContextsRequest=app.deleteContextsRequest(options);
@@ -195,7 +197,7 @@ module.exports = function (token,user_Id,query,callback) {
 								console.log(error);
 								callbak(reply);	
 								});
-				
+								delete_ContextsRequest.end();
 							}
 							else{
 
@@ -209,7 +211,7 @@ module.exports = function (token,user_Id,query,callback) {
 								console.log(error);
 								callbak(reply);	
 								});
-	
+								delete_ContextsRequest.end();
 								}
 											
 
@@ -231,7 +233,7 @@ module.exports = function (token,user_Id,query,callback) {
 				console.log(error);
 				callbak(reply);	
 				});
-
+				delete_ContextsRequest.end();
 
 
 			}
@@ -247,7 +249,7 @@ module.exports = function (token,user_Id,query,callback) {
 				console.log(error);
 				callbak(reply);	
 				});
-
+				delete_ContextsRequest.end();
 
 
 
@@ -282,6 +284,8 @@ module.exports = function (token,user_Id,query,callback) {
 		});
 
 		request.end();
+
+		//request.setMaxListeners(100);
 
 		process.on('uncaughtExceptions',function(){
 			console.log('Error');
