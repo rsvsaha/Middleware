@@ -1,4 +1,4 @@
-//var cor=require('cors');
+var cor=require('cors');
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser'); 
@@ -9,7 +9,7 @@ var gen = require('./Authenticator.js');
 var back = require('./backend_conn.js');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-//app.use(cor());
+app.use(cor());
 
 var hostname = '127.0.0.1';
 var port = 2000;
