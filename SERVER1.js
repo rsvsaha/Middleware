@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var fs=require('fs');
 var comm=require('./common.js');
 var chatbot=require('./Chatbot_V1.js');
+var gen=require('./Authenticator.js');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //app.use(cor());
@@ -44,8 +45,11 @@ app.post('/login', function(req,res){
 		console.log("POST request obtained at /login");
 		console.log(req.body);
 		res.json({"token":'1234'});
+
 		comm.logger(req,function(user,password){
-			res.send('1234');
+			gen.generateToken(user,'false',function(token){
+				res.send(token);
+			});
 		});
 				
 	});
@@ -58,15 +62,15 @@ app.post('/chat', function(req, res){
 	//var token=req.body.token;
 	//var query=req.body.query;
 
-	comm.chat(req, function(result,token){
-		chatbot(token,result,function(reply){
+	comm.chat(req, function(result,token,user){
+		chatbot(token, user, result,function(reply){
 			res.send(reply);
 		});
 /*
 	chatbot(token,query,function(reply){
 		res.send(reply);
 */
-	})
+	});
 
 
 	});
