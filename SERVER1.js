@@ -3,7 +3,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser'); 
 var fs=require('fs');
-var comm=require('./common.js');
+var comm=require('./Common.js');
 var chatbot=require('./Chatbot_V1.js');
 var gen=require('./Authenticator.js');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -12,9 +12,6 @@ app.use(bodyParser.json());
 
 var hostname = '127.0.0.1';
 var port = 3000;
-
-var username;
-var pass;
 
 
 app.post('/HELLO', function(req,res){
@@ -62,8 +59,8 @@ app.post('/chat', function(req, res){
 	//var token=req.body.token;
 	//var query=req.body.query;
 
-	comm.chat(req, function(query,token,user){
-		chatbot(token, user,query,function(reply){
+	comm.chat(req, function(query,token,userID){
+		chatbot(token,userID,query,function(reply){
 			res.send(reply);
 		});
 /*
