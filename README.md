@@ -1,6 +1,6 @@
 # Middleware
 
-The SERVER1.js is the server which must be started before the entire process begins.
+The Server.js is the server which must be started before the entire process begins.
 
 It has two routes one for chat and another for login at /chat and /login respectively.
 
