@@ -7,9 +7,12 @@ var comm = require('./common.js');
 var chatbot = require('./Chatbot_V1.js');
 var gen = require('./Authenticator.js');
 var back = require('./backend_conn.js');
+const router = require('./DEREQ_router');
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cor());
+app.use('/', router);
 
 var hostname = '127.0.0.1';
 var port = 2000;
@@ -39,8 +42,8 @@ app.get('/', function (req, res) {
 });
 */
 app.post('/login_auth', function(req, res) {
-		console.log("POST request obtained at /login_auth");
-		console.log(req.body);
+		//console.log("POST request obtained at /login_auth");
+		//console.log(req.body);
 
 		comm.logger(req, function(user, password){
 
@@ -50,10 +53,11 @@ app.post('/login_auth', function(req, res) {
 					 };
 
 			back.bklogin(json_param, function(json_return) {
+
 				if(json_return.statusCode == 200)
-					res.json({"token": json_return.body});
+					res.status(json_return.statusCode).send(json_return/*"token": json_return.body*/);
 				else
-					res.status(200).send('Sorry');
+					res.json({"statusCode" : json_return.statusCode});
 			});
 		});
 				
@@ -61,8 +65,8 @@ app.post('/login_auth', function(req, res) {
 
 
 app.post('/chat', function(req, res){
-	console.log("POST request obtained at /chat");
-	console.log(req.method);
+	//console.log("POST request obtained at /chat");
+	//console.log(req.method);
 	console.log(req.body);
 
 	comm.chat(req, function(result, token, user) {
